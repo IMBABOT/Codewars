@@ -13,12 +13,16 @@ public class WhitespaceNumber {
                 sb.append(" ");
             }
         }
+
         if (temp.charAt(0) == '-'){
             temp = temp.substring(1);
+            convert = Integer.valueOf(temp);
+        }else  if (temp.charAt(0) != '-'){
             convert = Integer.valueOf(temp);
         }
 
         binary = intToBinary(convert);
+
 
         for (int i = 0; i < binary.length() ; i++) {
             if (binary.charAt(i) == '1'){
