@@ -6,12 +6,11 @@ public class WhitespaceNumber {
         String binary = "";
         int convert = 0;
 
-        for (int i = 0; i < temp.length() ; i++) {
-            if (temp.charAt(i) == '-') {
-                sb.append("\\t");
-            }else{
-                sb.append(" ");
-            }
+        if (temp.charAt(0) == '-'){
+            sb.append("\t");
+        }
+        if (temp.charAt(0) != '-'){
+            sb.append(' ');
         }
 
         if (temp.charAt(0) == '-'){
@@ -26,13 +25,13 @@ public class WhitespaceNumber {
 
         for (int i = 0; i < binary.length() ; i++) {
             if (binary.charAt(i) == '1'){
-                sb.append("\\t");
+                sb.append("\t");
             }else  if (binary.charAt(i) == '0'){
                 sb.append(" ");
             }
         }
 
-        sb.append("\\n");
+        sb.append("\n");
 
         return sb.toString();
     }
