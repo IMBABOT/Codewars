@@ -24,6 +24,9 @@ public class ExpandedForm {
         int times = 0;
         int i = 0;
         while (enter > 0) {
+            if (times == result){
+                break;
+            }
             if (arr[j] != 0) {
                 sb.append(arr[j]);
                 times++;
@@ -38,8 +41,6 @@ public class ExpandedForm {
                     j++;
                 }else if (times > 1){
                     j = i + 1;
-                }else if (times == result){
-                    break;
                 }
             }else if (arr[j] == 0){
                 j++;
@@ -50,7 +51,3 @@ public class ExpandedForm {
         return "1";
     }
 }
-
-
-
-
