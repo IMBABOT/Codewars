@@ -1,71 +1,56 @@
 import java.util.Arrays;
 
 public class ExpandedForm {
-
-
     public static String expandedForm(int num) {
         String temp = Integer.toString(num);
         int[] arr = new int[temp.length()];
         StringBuilder sb = new StringBuilder();
-
-        int counter = 1;
-        int j = 1;
+        int enter = 0;
+        int j = 0;
         for (int i = 0; i < arr.length; i++) {
             arr[i] = temp.charAt(i) - '0';
         }
 
-        sb.append(arr[0]);
-        int length = arr.length - 1;
 
-        while (length > 0){
-            sb.append("0");
-            length--;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                enter++;
+            }
         }
 
-        sb.append(" " + "+" + " ");
+        int result = enter;
+        System.out.println(enter);
 
-
-        while (j < arr.length -1) {
-            while (arr[counter] == 0) {
-                counter++;
-                if (arr[counter] != 0) {
-                    sb.append(arr[counter]);
+        int times = 0;
+        int i = 0;
+        while (enter > 0) {
+            if (arr[j] != 0) {
+                sb.append(arr[j]);
+                times++;
+                i = j;
+                while (j < arr.length - 1){
+                    sb.append(0);
+                    j++;
                 }
+                if (times == 1) {
+                    enter--;
+                    j = 0;
+                    j++;
+                }else if (times > 1){
+                    j = i + 1;
+                }else if (times == result){
+                    break;
+                }
+            }else if (arr[j] == 0){
+                j++;
             }
-            int[] array = new int[arr.length - counter];
-            System.arraycopy(arr, counter, array, 0, arr.length-counter);
-            arr = array;
-            System.out.println(Arrays.toString(arr));
-            temp(array);
-
-
-            while (counter > 0) {
-                sb.append("0");
-                counter--;
-            }
-            j++;
-
         }
 
         System.out.println(sb);
-
         return "1";
     }
-
-    private static StringBuilder temp(int[] arr){
-        StringBuilder sb = new StringBuilder();
-        int counter = 1;
-        while (arr[counter] == 0) {
-            counter++;
-            if (arr[counter] != 0) {
-                sb.append(arr[counter]);
-            }
-        }
-
-        System.out.println(sb);
-
-
-        return sb;
-    }
 }
+
+
+
 
