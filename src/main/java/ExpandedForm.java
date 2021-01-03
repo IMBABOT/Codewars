@@ -35,6 +35,7 @@ public class ExpandedForm {
                     sb.append(0);
                     j++;
                 }
+                sb.append(" " + "+ ");
                 if (times == 1) {
                     enter--;
                     j = 0;
@@ -47,7 +48,8 @@ public class ExpandedForm {
             }
         }
 
-        System.out.println(sb);
-        return "1";
+        String res = sb.toString();
+        return res.substring(0, res.length() - 3);
+
     }
 }
