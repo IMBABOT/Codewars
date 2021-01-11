@@ -42,7 +42,7 @@ public class ExpandedForm {
                     j++;
                 }else if (times > 1){
                     j = i + 1;
-                }
+
             }else if (arr[j] == 0){
                 j++;
             }
