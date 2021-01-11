@@ -43,7 +43,9 @@ public class ExpandedForm {
                 }else if (times > 1){
                     j = i + 1;
                 }
-
+            }else if (arr[j] == 0){
+                j++;
+            }
         }
 
         String res = sb.toString();
