@@ -24,14 +24,14 @@ public class ExpandedForm {
         int times = 0;
         int i = 0;
         while (enter > 0) {
-            if (times == result){
+            if (times == result) {
                 break;
             }
             if (arr[j] != 0) {
                 sb.append(arr[j]);
                 times++;
                 i = j;
-                while (j < arr.length - 1){
+                while (j < arr.length - 1) {
                     sb.append(0);
                     j++;
                 }
@@ -40,15 +40,15 @@ public class ExpandedForm {
                     enter--;
                     j = 0;
                     j++;
-                }else if (times > 1){
+                } else if (times > 1) {
                     j = i + 1;
-            }else if (arr[j] == 0){
-                j++;
+                } else if (arr[j] == 0) {
+                    j++;
+                }
             }
         }
 
-        String res = sb.toString();
-        return res.substring(0, res.length() - 3);
-
+            String res = sb.toString();
+            return res.substring(0, res.length() - 3);
     }
 }
