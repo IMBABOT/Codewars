@@ -1,3 +1,4 @@
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 public class EnoughIsEnough {
@@ -11,25 +12,28 @@ public class EnoughIsEnough {
         HashMap<Integer, Integer> map = new HashMap<>();
 
 
-        for (int i = 0; i <elements.length ; i++) {
-            if (!map.containsKey(elements[i])){
+        System.out.println(Arrays.toString(elements) + "arr");
+
+        for (int i = 0; i < elements.length; i++) {
+            if (!map.containsKey(elements[i])) {
                 map.put(elements[i], 1);
-            }else if (map.containsKey(elements[i])){
+            } else if (map.containsKey(elements[i])) {
                 map.put(elements[i], map.get(elements[i]) + 1);
             }
         }
-            int count = 0;
-            int value = 0;
-        for (Map.Entry<Integer, Integer> m : map.entrySet()){
-            if (m.getValue() > maxOccurrences){
+
+
+        int count = 0;
+        int value = 0;
+        for (Map.Entry<Integer, Integer> m : map.entrySet()) {
+            if (m.getValue() > maxOccurrences) {
                 count++;
                 value = m.getValue();
             }
         }
 
 
-
-        while (index <= elements.length - 1) {
+        while (index < elements.length) {
             for (int i = 0; i < elements.length; i++) {
                 if (elements[index] == elements[i]) {
                     occurrences++;
@@ -40,75 +44,120 @@ public class EnoughIsEnough {
             index++;
             occurrences = 0;
         }
-            if (count == 1) {
-                int first = 0;
-                while (count > 0) {
-                    if (first > element.size() - 3) {
-                        break;
-                    }
-                    int elem = element.get(first);
-                    int delete = occurrence.get(first) - maxOccurrences;
-                    int ind = element.size() - 1;
-                    while (ind >= 0) {
-                        if (element.get(ind) == elem) {
-                            while (delete > 0) {
-                                element.remove(ind);
-                                delete--;
-                                break;
-                            }
-                        }
-                        ind--;
-                    }
-                    if (delete < 0) {
-                        first++;
-                        count++;
-                    } else {
-                        first++;
-                        count--;
-                    }
+        int maxOccur = 0;
+        if (elements.length > 0) {
+            maxOccur = occurrence.get(0);
+            for (int i = 0; i < occurrence.size(); i++) {
+                if (maxOccur < occurrence.get(i)) {
+                    maxOccur = occurrence.get(i);
                 }
             }
-
-            if (count > 1){
-                int first = 0;
-                while (count > 0) {
-                    if (first > element.size()) {
-                        break;
-                    }
-                    int elem = element.get(first);
-                    int delete = occurrence.get(first) - maxOccurrences;
-                    int ind = element.size() - 1;
-                    while (ind >= 0) {
-                        if (element.get(ind) == elem) {
-                            while (delete > 0) {
-                                element.remove(ind);
-                                delete--;
-                                break;
-                            }
-                        }
-                        ind--;
-                    }
-
-                        first++;
-                        count--;
-                }
-            }
-
-
-
-            int[] result = new int[element.size()];
-
-        for (int i = 0; i <element.size() ; i++) {
-            result[i] = element.get(i);
         }
-        System.out.println(Arrays.toString(result));
 
-        return result;
+
+        HashSet<Integer> set = new HashSet<>();
+        int temp = -1;
+        while (temp < element.size() - 1) {
+            temp++;
+            if (occurrence.get(temp) > maxOccurrences) {
+                set.add(element.get(temp));
+            }
+        }
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Integer i : set){
+            list.add(i);
+        }
+
+        for (int i = 0; i <list.size() ; i++) {
+            for (int j = 0; j <list.size() - i - 1; j++) {
+                if (list.get(j) > list.get(j + 1)) {
+                    int tem = list.get(j);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, tem);
+                }
+
+            }
+        }
+
+        TreeMap<Integer, Integer> hashMap = new TreeMap<>();
+        for (int i = 0; i < occurrence.size() ; i++) {
+            if (occurrence.get(i) > maxOccurrences){
+                hashMap.put(element.get(i), occurrence.get(i));
+            }
+        }
+
+
+        List<Integer> result = new ArrayList<>();
+
+
+        if (elements.length > 0) {
+            if (maxOccur < maxOccurrences) {
+                for (int i = 0; i < element.size(); i++) {
+                    result.add(element.get(i));
+                }
+            } else if (count > 0) {
+                if (maxOccurrences == 0) {
+                    element.clear();
+                } else {
+                    int first = 0;
+                    boolean isDeleted = false;
+                    while (count > 0) {
+                        int elem = list.get(first);
+                        int delete = hashMap.get(list.get(first)) - maxOccurrences;
+                        int ind = element.size() - 1;
+                        while (ind > 0) {
+                            if (element.get(ind) == elem) {
+                                while (delete > 0) {
+                                    element.remove(ind);
+                                    occurrence.remove(ind);
+                                    isDeleted = true;
+                                    delete--;
+                                    break;
+                                }
+                            }
+                            ind--;
+                        }
+                        if (isDeleted) {
+                            first++;
+                            count--;
+                        } else {
+                            first++;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        int[] res = new int[element.size()];
+        if (maxOccur > maxOccurrences || maxOccurrences == maxOccur) {
+            for (int i = 0; i < element.size(); i++) {
+                result.add(element.get(i));
+            }
+
+
+
+            if (elements.length > 0) {
+                for (int i = 0; i < result.size(); i++) {
+                    res[i] = result.get(i);
+                }
+            }
+        }else if (maxOccur < maxOccurrences){
+            res = elements;
+        }
+
+        System.out.println(Arrays.toString(res) + "res");
+
+        return res;
+
+
     }
 
 
+
+
     public static void main(String[] args) {
-        int[] arr = new int[]{  12, 13, 79, 76, 71, 46, 14, 85, 21, 19, 42, 74, 3, 1, 23, 22, 60, 47, 85, 46, 10, 9, 56, 56, 2, 63, 58, 23, 4, 30, 51, 33, 14, 17, 64, 10, 8, 18, 88, 65, 62, 52, 3, 30, 62, 34, 13, 40, 77, 2, 69, 43, 41, 89, 38, 84, 17, 25, 76, 47, 60, 33, 41, 25, 19, 84, 87, 63, 50, 48, 36, 59, 38, 29, 62, 69, 14, 32, 9, 52, 85, 23, 89, 51, 16, 39, 71, 51, 50, 40  };
-        deleteNth(arr,      3);
+        int[] arr = new int[]{ 1, 19, 15, 14, 17, 16, 16, 14, 23, 13, 16, 1, 1, 9, 22, 17, 21, 11, 18, 1, 17, 12, 13, 14};
+        deleteNth(arr,   2);
     }
 }
