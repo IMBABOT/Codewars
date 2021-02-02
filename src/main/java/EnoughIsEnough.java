@@ -158,6 +158,6 @@ public class EnoughIsEnough {
 
     public static void main(String[] args) {
         int[] arr = new int[]{ 1, 19, 15, 14, 17, 16, 16, 14, 23, 13, 16, 1, 1, 9, 22, 17, 21, 11, 18, 1, 17, 12, 13, 14};
-        deleteNth(arr,   2);
+        deleteNth(arr,  2);
     }
 }
