@@ -15,14 +15,10 @@ public class DirReduc {
 
         for (int i = 0; i < strings.size(); i++) {
             for (int j = 0; j < strings.size() - 1; j++) {
-                if (strings.get(j).equals(n) && strings.get(j + 1).equals(e) ||
-                        strings.get(j).equals(e) && strings.get(j + 1).equals(n) ||
-                        strings.get(j).equals(n) && strings.get(j + 1).equals(w) ||
-                        strings.get(j).equals(w) && strings.get(j + 1).equals(n) ||
-                        strings.get(j).equals(s) && strings.get(j + 1).equals(e) ||
-                        strings.get(j).equals(e) && strings.get(j + 1).equals(s) ||
-                        strings.get(j).equals(s) && strings.get(j + 1).equals(w) ||
-                        strings.get(j).equals(w) && strings.get(j + 1).equals(s)) {
+                if (strings.get(j).equals(n) && strings.get(j + 1).equals(s) ||
+                        strings.get(j).equals(s) && strings.get(j + 1).equals(n) ||
+                        strings.get(j).equals(w) && strings.get(j + 1).equals(e) ||
+                        strings.get(j).equals(e) && strings.get(j + 1).equals(w)){
 
                         for (int h = 0; h < strings.size() - 1; h++) {
                             if (strings.get(h).equals(n) && strings.get(h + 1).equals(s)) {
