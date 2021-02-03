@@ -4,6 +4,6 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        WhereIsMyParent.findChildren("abBA");
+        System.out.println(GrillIt.grille("abcdef", 5));
     }
 }
