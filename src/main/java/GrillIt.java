@@ -3,8 +3,6 @@ import java.util.*;
 public class GrillIt {
 
     public static String grille(String message, int code) {
-        System.out.println(code);
-        System.out.println(message);
         String result1 = "";
         if (message.length() > 0) {
             String result = "";
@@ -21,8 +19,6 @@ public class GrillIt {
                 code = code / 2;
             }
             temp = new StringBuilder(result).reverse().toString();
-
-            System.out.println(temp);
 
             List<String> first = new ArrayList<>();
             List<String> second = new ArrayList<>();
@@ -44,15 +40,23 @@ public class GrillIt {
                 first.add(i, "0");
             }
 
-            System.out.println(code);
-            int index = 0;
-            while (index < second.size()) {
+            int index = first.size() - 1;
+            int ind = second.size() - 1;
+            while (index >= 0) {
                 if (first.get(index).equals("0")) {
+                    if (ind < 0){
+                        break;
+                    }
                     res.add("null");
+                    ind--;
                 } else if (first.get(index).equals("1")) {
-                    res.add(second.get(index));
+                    if (ind < 0){
+                        break;
+                    }
+                    res.add(second.get(ind));
+                    ind--;
                 }
-                index++;
+                index--;
             }
 
 
@@ -71,14 +75,15 @@ public class GrillIt {
             result1 = result1.replaceAll("]", "");
             result1 = result1.substring(1);
 
+            StringBuilder sb = new StringBuilder();
+            sb.append(result1);
+            sb.reverse();
+            result1 = sb.toString();
+
         }
         if (message.length() == 0){
             result1 = "";
         }
-
-        System.out.println(result1);
-        System.out.println(result1);
-
 
         return result1;
 
