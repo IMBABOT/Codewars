@@ -17,5 +17,6 @@ public class NewAverage {
             throw new IllegalArgumentException();
         }
 
+        return result;
     }
 }
